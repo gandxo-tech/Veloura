@@ -1,0 +1,1521 @@
+/* ==========================================================================
+   VELOURA — style.css
+   Éditorial strictement monochrome, unité dynamique u, 1440px desktop & mobile
+   ========================================================================== */
+
+:root {
+  --u: min(calc(100vw / 1440), 1.333px);
+
+  /* Palette monochrome stricte */
+  --paper: #dadada;
+  --ink: #111111;
+  --black: #000000;
+  --white: #ffffff;
+  --text-light: #f4f4f4;
+  --text-grey: #6f6f6f;
+  --text-muted: #8e8e8e;
+  
+  --card-dark: #191919;
+  --card-distinctions: #262626;
+  --card-avatars: #d6d6d6;
+  --frame-grey: #cdcdcd;
+
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-medium: rgba(255, 255, 255, 0.28);
+  --border-light-box: rgba(0, 0, 0, 0.08);
+
+  --font-body: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Archivo', sans-serif;
+}
+
+/* ==================== RESET & BASE ==================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--black);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--black);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Règle absolue du prompt : toutes les photos forcées en N&B */
+img, .hero-photo-img, .stats-card-img, .harmattan-img, .portrait-img, .avatar-img {
+  filter: grayscale(1) contrast(1.05);
+}
+
+/* Fallback gradient si chargement impossible */
+.has-fallback-gradient {
+  background: linear-gradient(135deg, #a0a0a0 0%, #686868 100%) !important;
+}
+
+/* ==================== SECTION 1: HERO ==================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: calc(938 * var(--u));
+  background-color: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Conteneur de la grande photo du hero */
+.hero-photo-wrapper {
+  position: absolute;
+  left: calc(338 * var(--u));
+  top: calc(-86 * var(--u));
+  width: calc(764 * var(--u));
+  height: calc(1024 * var(--u));
+  background-color: var(--paper);
+  z-index: 5;
+
+  /* Masque latéral 6% */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  will-change: transform;
+}
+
+.hero-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.08) brightness(1.06);
+  will-change: transform, filter, opacity;
+  pointer-events: none;
+}
+
+/* Plaque de marque sur le dos en (532, 444), 364 × 73u */
+/* Positionnée à l'intérieur de .hero-photo-wrapper: left = 532 - 338 = 194u, top = 444 - (-86) = 530u */
+.hero-brand-plate {
+  position: absolute;
+  left: calc(194 * var(--u));
+  top: calc(530 * var(--u));
+  width: calc(364 * var(--u));
+  height: calc(73 * var(--u));
+  background: rgba(18, 18, 18, 0.84);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: calc(8 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(24 * var(--u));
+  color: var(--text-light);
+  z-index: 10;
+  box-shadow: 0 calc(12 * var(--u)) calc(30 * var(--u)) rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+}
+
+.brand-plate-logo {
+  display: flex;
+  align-items: center;
+}
+
+.brand-plate-name {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 115, 'wght' 700;
+  font-size: calc(25 * var(--u));
+  letter-spacing: 0.14em;
+  color: var(--text-light);
+}
+
+.brand-plate-menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: calc(5 * var(--u));
+  width: calc(20 * var(--u));
+}
+
+.brand-plate-menu-icon .menu-bar {
+  display: block;
+  height: 2px;
+  background-color: var(--text-light);
+  border-radius: 1px;
+}
+
+.brand-plate-menu-icon .menu-bar:last-child {
+  width: 70%;
+  align-self: flex-end;
+}
+
+/* Ligne de livraison à y 864 -> top = 864 - (-86) = 950u */
+/* Dans hero-photo-wrapper (largeur 764u) : centrage parfait avec left = (764 - 364)/2 = 200u */
+.hero-delivery-row {
+  position: absolute;
+  left: calc(200 * var(--u));
+  top: calc(950 * var(--u));
+  width: calc(364 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(10 * var(--u));
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: calc(6 * var(--u)) calc(16 * var(--u));
+  border-radius: calc(20 * var(--u));
+  pointer-events: auto;
+}
+
+.delivery-label {
+  font-family: var(--font-body);
+  font-size: calc(11 * var(--u));
+  font-weight: 500;
+  color: #9e9e9e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.delivery-cities {
+  font-family: var(--font-body);
+  font-size: calc(13 * var(--u));
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+/* Navigation en pilule blanche segmentée en (57, 61) */
+.hero-nav {
+  position: absolute;
+  left: calc(57 * var(--u));
+  top: calc(61 * var(--u));
+  z-index: 20;
+}
+
+.nav-pill {
+  position: relative;
+  height: calc(48 * var(--u));
+  background: var(--white);
+  border-radius: calc(24 * var(--u));
+  display: inline-flex;
+  align-items: center;
+  padding: 0 calc(6 * var(--u));
+  box-shadow: 0 calc(2 * var(--u)) calc(12 * var(--u)) rgba(0, 0, 0, 0.06);
+}
+
+.nav-sliding-pill {
+  position: absolute;
+  top: calc(4 * var(--u));
+  left: calc(4 * var(--u));
+  height: calc(40 * var(--u));
+  background-color: var(--ink);
+  border-radius: calc(20 * var(--u));
+  pointer-events: none;
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.25, 1), width 0.32s cubic-bezier(0.2, 0.8, 0.25, 1);
+  z-index: 1;
+}
+
+.nav-link {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: calc(14 * var(--u));
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0 calc(16 * var(--u));
+  height: calc(40 * var(--u));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.25s ease;
+  user-select: none;
+}
+
+.nav-link.is-active {
+  color: var(--white);
+}
+
+/* Haut droit : Date arrivage en (1038, 70) & bouton WhatsApp en (1237, 63) */
+.hero-top-right {
+  position: absolute;
+  right: calc(59 * var(--u));
+  top: calc(63 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(24 * var(--u));
+  z-index: 20;
+}
+
+.hero-drop-date {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.25;
+}
+
+.drop-label {
+  font-family: var(--font-body);
+  font-size: calc(12 * var(--u));
+  font-weight: 400;
+  color: #555555;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.drop-value {
+  font-family: var(--font-body);
+  font-size: calc(14 * var(--u));
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.btn-whatsapp-hero {
+  width: calc(144 * var(--u));
+  height: calc(46 * var(--u));
+  background-color: var(--ink);
+  color: var(--white);
+  border-radius: calc(23 * var(--u));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(6 * var(--u));
+  font-family: var(--font-body);
+  font-size: calc(14 * var(--u));
+  font-weight: 500;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-whatsapp-hero:hover {
+  transform: translateY(-1px);
+  background-color: #000000;
+}
+
+/* Titre Hero PURE STYLE en (57, 246), (’26) en (339, 272) */
+.hero-title-container {
+  position: absolute;
+  left: calc(57 * var(--u));
+  top: calc(246 * var(--u));
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-mask-line {
+  overflow: hidden;
+  line-height: 0.86;
+}
+
+.hero-title-line {
+  display: block;
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 104, 'wght' 640;
+  font-size: calc(90 * var(--u));
+  line-height: 0.86;
+  letter-spacing: -0.06em;
+  color: var(--ink);
+  text-transform: uppercase;
+  will-change: transform;
+}
+
+.hero-title-year {
+  position: absolute;
+  left: calc(282 * var(--u));
+  top: calc(26 * var(--u));
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 104, 'wght' 600;
+  font-size: calc(32 * var(--u));
+  color: #555555;
+  letter-spacing: -0.04em;
+}
+
+/* À Propos en y 458, bouton en y 584 */
+.hero-about-container {
+  position: absolute;
+  left: calc(57 * var(--u));
+  top: calc(458 * var(--u));
+  z-index: 10;
+  max-width: calc(340 * var(--u));
+}
+
+.hero-about-tag {
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  margin-bottom: calc(12 * var(--u));
+}
+
+.tag-dot {
+  font-size: calc(8 * var(--u));
+  color: var(--ink);
+}
+
+.tag-text {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 600;
+  font-size: calc(12 * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.hero-about-text {
+  font-family: var(--font-body);
+  font-size: calc(14 * var(--u));
+  font-weight: 500;
+  line-height: 1.45;
+  color: #333333;
+  margin-bottom: calc(24 * var(--u));
+}
+
+.btn-black-hero {
+  height: calc(48 * var(--u));
+  padding: 0 calc(22 * var(--u));
+  background-color: var(--ink);
+  color: var(--white);
+  border-radius: calc(24 * var(--u));
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  font-family: var(--font-body);
+  font-size: calc(14 * var(--u));
+  font-weight: 500;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-black-hero:hover {
+  transform: translateY(-1px);
+  background-color: #000000;
+}
+
+/* Cadre de stats en (57, 693), 341 × 208u, gris clair #cdcdcd */
+.hero-stats-frame {
+  position: absolute;
+  left: calc(57 * var(--u));
+  top: calc(693 * var(--u));
+  width: calc(341 * var(--u));
+  height: calc(208 * var(--u));
+  background-color: var(--frame-grey);
+  border-radius: calc(12 * var(--u));
+  padding: calc(8 * var(--u));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(8 * var(--u));
+  z-index: 15;
+  box-shadow: 0 calc(10 * var(--u)) calc(24 * var(--u)) rgba(0, 0, 0, 0.08);
+}
+
+/* Carte sombre 400+ clients */
+.stats-dark-card {
+  background-color: var(--card-dark);
+  color: var(--text-light);
+  border-radius: calc(8 * var(--u));
+  padding: calc(12 * var(--u));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stats-counter-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-number {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-size: calc(26 * var(--u));
+  line-height: 1;
+  color: var(--white);
+}
+
+.stats-label {
+  font-family: var(--font-body);
+  font-size: calc(11 * var(--u));
+  color: #a4a4a4;
+  margin-top: calc(2 * var(--u));
+}
+
+.stats-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(4 * var(--u));
+  margin: calc(6 * var(--u)) 0;
+}
+
+.cat-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: calc(4 * var(--u));
+  font-size: calc(9.5 * var(--u));
+  font-weight: 500;
+  padding: calc(2 * var(--u)) calc(4 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--u));
+  color: #d8d8d8;
+  white-space: nowrap;
+}
+
+.cat-glyph {
+  font-size: calc(9 * var(--u));
+}
+
+.stats-store-bar {
+  background: var(--white);
+  color: var(--ink);
+  height: calc(26 * var(--u));
+  border-radius: calc(4 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(4 * var(--u));
+  font-size: calc(10.5 * var(--u));
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.stats-store-bar:hover {
+  transform: translateY(-1px);
+  background-color: #f0f0f0;
+}
+
+/* Carte photo 230+ pièces */
+.stats-photo-card {
+  position: relative;
+  background-color: #1a1a1a;
+  border-radius: calc(8 * var(--u));
+  overflow: hidden;
+}
+
+.stats-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stats-photo-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.6) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(10 * var(--u));
+  color: var(--white);
+}
+
+.stats-photo-header {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--u));
+}
+
+.lookbook-tag {
+  font-family: var(--font-body);
+  font-size: calc(10 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #e0e0e0;
+}
+
+.lookbook-line {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
+  width: 100%;
+}
+
+.stats-photo-footer {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.photo-counter-num {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-size: calc(24 * var(--u));
+  line-height: 1;
+  color: var(--white);
+}
+
+.photo-counter-desc {
+  font-family: var(--font-body);
+  font-size: calc(9.5 * var(--u));
+  line-height: 1.25;
+  color: #cfcfcf;
+  margin-top: calc(2 * var(--u));
+  max-width: calc(120 * var(--u));
+}
+
+/* Colonne droite du hero */
+.hero-right-column {
+  position: absolute;
+  right: calc(57 * var(--u));
+  top: calc(258 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 15;
+}
+
+/* Pilule givrée Pièces vérifiées en (1216, 258) */
+.verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: calc(6 * var(--u)) calc(14 * var(--u));
+  border-radius: calc(20 * var(--u));
+  box-shadow: 0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(0, 0, 0, 0.05);
+}
+
+.check-disc {
+  width: calc(18 * var(--u));
+  height: calc(18 * var(--u));
+  background-color: var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verified-text {
+  font-family: var(--font-body);
+  font-size: calc(13 * var(--u));
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Disponibilité en y 442 */
+.hero-availability {
+  margin-top: calc(78 * var(--u));
+  text-align: right;
+  line-height: 1.35;
+}
+
+.avail-line-1 {
+  font-family: var(--font-body);
+  font-size: calc(13.5 * var(--u));
+  color: #444444;
+}
+
+.avail-line-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  font-family: var(--font-body);
+  font-size: calc(14 * var(--u));
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.avail-pulse-dot {
+  font-size: calc(9 * var(--u));
+  color: #111;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+/* Carte Capsule Harmattan */
+.harmattan-card {
+  margin-top: calc(28 * var(--u));
+  width: calc(230 * var(--u));
+  display: flex;
+  flex-direction: column;
+}
+
+.harmattan-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: calc(8 * var(--u));
+}
+
+.harmattan-badge {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 600;
+  font-size: calc(11 * var(--u));
+  color: #555555;
+  text-transform: uppercase;
+}
+
+.harmattan-title {
+  font-family: var(--font-body);
+  font-size: calc(13 * var(--u));
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.harmattan-year {
+  font-family: var(--font-body);
+  font-size: calc(11 * var(--u));
+  color: #777777;
+}
+
+.harmattan-img-container {
+  position: relative;
+  width: 100%;
+  height: calc(196 * var(--u));
+  border-radius: calc(10 * var(--u));
+  overflow: hidden;
+  background-color: #222222;
+  box-shadow: 0 calc(8 * var(--u)) calc(20 * var(--u)) rgba(0, 0, 0, 0.12);
+}
+
+.harmattan-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Mise à l'échelle initiale 1.55 depuis 62% 45% */
+  transform-origin: 62% 45%;
+  transform: scale(1.55);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+.harmattan-card:hover .harmattan-img {
+  transform: scale(1.72);
+}
+
+.btn-harmattan-round {
+  position: absolute;
+  right: calc(12 * var(--u));
+  bottom: calc(12 * var(--u));
+  width: calc(38 * var(--u));
+  height: calc(38 * var(--u));
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  z-index: 5;
+}
+
+.harmattan-arrow {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.harmattan-card:hover .btn-harmattan-round {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
+}
+
+.harmattan-card:hover .harmattan-arrow {
+  transform: rotate(45deg);
+}
+
+/* Ligne de progression Capsule Harmattan (trait blanc à 35% avec remplissage blanc) */
+.harmattan-progress-wrapper {
+  margin-top: calc(8 * var(--u));
+  width: 100%;
+}
+
+.harmattan-progress-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.harmattan-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--ink);
+  transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ==================== SECTION 2: BARRE & MANIFESTE ==================== */
+.manifesto-wrapper {
+  background-color: var(--black);
+  color: var(--text-light);
+  width: 100%;
+}
+
+/* Barre intermédiaire 111u */
+.editorial-divider-bar {
+  height: calc(111 * var(--u));
+  width: 100%;
+  background-color: var(--black);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(57 * var(--u));
+}
+
+.bar-left {
+  display: flex;
+  align-items: baseline;
+  gap: calc(6 * var(--u));
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 110, 'wght' 600;
+  font-size: calc(14 * var(--u));
+  letter-spacing: 0.1em;
+}
+
+.bar-since {
+  color: var(--text-light);
+}
+
+.bar-year {
+  color: var(--text-grey);
+}
+
+.bar-center {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 110, 'wght' 600;
+  font-size: calc(14 * var(--u));
+  letter-spacing: 0.14em;
+  color: var(--text-light);
+}
+
+.bar-scroll-circle {
+  width: calc(26 * var(--u));
+  height: calc(26 * var(--u));
+  background-color: var(--text-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceDown 2s infinite ease-in-out;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(3 * var(--u))); }
+}
+
+.bar-right {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 110, 'wght' 600;
+  font-size: calc(14 * var(--u));
+  letter-spacing: 0.14em;
+  color: var(--text-grey);
+}
+
+/* Section Manifeste : padding 170u haut, 230u bas */
+.manifesto-section {
+  padding-top: calc(170 * var(--u));
+  padding-bottom: calc(230 * var(--u));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--black);
+}
+
+.manifesto-content {
+  width: calc(830 * var(--u));
+  text-align: center;
+}
+
+/* Titre manifeste 52u, interligne 1.33, crénage -0.028em */
+.manifesto-text {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 500;
+  font-size: calc(52 * var(--u));
+  line-height: 1.33;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+}
+
+/* Chaque mot individuel pour l'animation au scroll */
+.manifesto-word {
+  display: inline-block;
+  color: var(--text-grey);
+  transition: color 0.15s ease-out;
+  will-change: color;
+  white-space: pre;
+}
+
+/* Sous-ligne 150u plus bas, 23u */
+.manifesto-subline {
+  margin-top: calc(150 * var(--u));
+}
+
+.subline-text {
+  font-family: var(--font-body);
+  font-size: calc(23 * var(--u));
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text-light);
+}
+
+.subline-italic-grey {
+  font-style: italic;
+  color: var(--text-grey);
+}
+
+/* ==================== SECTION 3: PANNEAU DE CONFIANCE ==================== */
+.trust-section {
+  background-color: var(--black);
+  padding-bottom: calc(150 * var(--u));
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Panneau 1302 × 429u encadré */
+.trust-panel {
+  width: calc(1302 * var(--u));
+  min-height: calc(429 * var(--u));
+  border: 1px solid var(--border-medium);
+  border-radius: calc(14 * var(--u));
+  padding: calc(44 * var(--u)) calc(44 * var(--u)) calc(44 * var(--u)) calc(54 * var(--u));
+  display: grid;
+  grid-template-columns: calc(420 * var(--u)) 1fr;
+  gap: calc(40 * var(--u));
+  background-color: #050505;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Colonne gauche */
+.trust-left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.trust-title-wrapper {
+  position: relative;
+}
+
+.trust-heading {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 500;
+  font-size: calc(55 * var(--u));
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.title-line {
+  position: relative;
+  display: inline-block;
+}
+
+.title-line-first {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(14 * var(--u));
+}
+
+.title-line-last {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(16 * var(--u));
+}
+
+/* Deux tuiles d'icône en verre dépoli 88u, rayon 12u */
+.frosted-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(88 * var(--u));
+  height: calc(88 * var(--u));
+  border-radius: calc(12 * var(--u));
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  vertical-align: middle;
+  box-shadow: 0 calc(8 * var(--u)) calc(20 * var(--u)) rgba(0, 0, 0, 0.4);
+}
+
+.tile-asterisk {
+  transform: translateY(calc(-4 * var(--u)));
+}
+
+.tile-dots {
+  transform: translateY(calc(4 * var(--u)));
+}
+
+.trust-description {
+  font-family: var(--font-body);
+  font-size: calc(14.5 * var(--u));
+  font-weight: 400;
+  line-height: 1.5;
+  color: #a4a4a4;
+  max-width: calc(380 * var(--u));
+  margin-top: calc(24 * var(--u));
+}
+
+/* Colonne droite : Cartes de 326u de haut */
+.trust-right-cards {
+  display: flex;
+  align-items: center;
+  gap: calc(20 * var(--u));
+  height: 100%;
+}
+
+.trust-card {
+  height: calc(326 * var(--u));
+  border-radius: calc(8 * var(--u));
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+/* Survol des cartes : montée de 6u */
+.trust-card:hover {
+  transform: translateY(calc(-6 * var(--u)));
+}
+
+/* Carte 1 : Avatars (#d6d6d6, 293u) */
+.card-avatars {
+  width: calc(293 * var(--u));
+  background-color: var(--card-avatars);
+  color: var(--ink);
+  padding: calc(24 * var(--u));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.avatars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: calc(12 * var(--u));
+  width: 100%;
+}
+
+.avatar-slot {
+  width: calc(48 * var(--u));
+  height: calc(48 * var(--u));
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #bebebe;
+  box-shadow: 0 calc(2 * var(--u)) calc(6 * var(--u)) rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-fallback {
+  font-family: var(--font-display);
+  font-size: calc(16 * var(--u));
+  font-weight: 700;
+  color: #444444;
+}
+
+.avatars-counter-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatars-number {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-size: calc(43 * var(--u));
+  line-height: 1;
+  color: var(--ink);
+}
+
+.avatars-label {
+  font-family: var(--font-body);
+  font-size: calc(13 * var(--u));
+  font-weight: 500;
+  color: #4a4a4a;
+  margin-top: calc(4 * var(--u));
+}
+
+/* Carte 2 : Distinctions (#262626, 298u) */
+.card-distinctions {
+  width: calc(298 * var(--u));
+  background-color: var(--card-distinctions);
+  color: var(--text-light);
+  padding: calc(24 * var(--u));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.distinctions-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.distinctions-num {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-size: calc(43 * var(--u));
+  line-height: 1;
+  color: var(--white);
+}
+
+.distinctions-label {
+  font-family: var(--font-body);
+  font-size: calc(13 * var(--u));
+  font-weight: 400;
+  color: #9c9c9c;
+  margin-top: calc(4 * var(--u));
+}
+
+.distinctions-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: calc(8 * var(--u));
+  padding: calc(10 * var(--u)) 0;
+}
+
+.badge-title {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 108, 'wght' 600;
+  font-size: calc(11 * var(--u));
+  letter-spacing: 0.12em;
+  color: #dfdfdf;
+}
+
+.distinctions-note {
+  font-family: var(--font-body);
+  font-size: calc(13 * var(--u));
+  font-weight: 400;
+  line-height: 1.45;
+  color: #8f8f8f;
+}
+
+/* Carte 3 : Portrait 200u coupée par le bord droit */
+.card-portrait {
+  width: calc(200 * var(--u));
+  position: relative;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Pied de page */
+.site-footer {
+  width: calc(1302 * var(--u));
+  margin-top: calc(30 * var(--u));
+  padding-top: calc(20 * var(--u));
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 105, 'wght' 600;
+  font-size: calc(12 * var(--u));
+  letter-spacing: 0.1em;
+  color: var(--text-grey);
+}
+
+.footer-demo-tag {
+  font-family: var(--font-body);
+  font-size: calc(11.5 * var(--u));
+  color: #666666;
+}
+
+.footer-wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  font-family: var(--font-body);
+  font-size: calc(12.5 * var(--u));
+  color: var(--text-light);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-wa-link:hover {
+  transform: translateY(-1px);
+  color: var(--white);
+}
+
+/* ==================== CAS PARTICULIER: PREFERS-REDUCED-MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .manifesto-word {
+    color: var(--text-light) !important;
+  }
+
+  .harmattan-progress-fill {
+    width: 68% !important;
+  }
+}
+
+/* ==================== RESPONSIVE TÉLÉPHONE (≤ 760px) ==================== */
+@media (max-width: 760px) {
+  :root {
+    --u: calc(100vw / 390);
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Mise en page en une colonne avec ordre exact du prompt :
+     1. Nav pilule à gauche & WhatsApp carré 40u à flèche
+     2. Titre, texte (À PROPOS) et Commander sur WhatsApp
+     3. Photo pleine largeur (470u) avec plaque de marque et ligne livraison par-dessus
+     4. Pièces vérifiées, cadre de stats (deux colonnes) et Nouveau (Capsule Harmattan)
+  */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    padding-bottom: calc(44 * var(--u));
+    overflow: visible;
+  }
+
+  /* 1. Header & Navigation */
+  .hero-nav {
+    position: relative;
+    left: auto;
+    top: auto;
+    order: 1;
+    margin: calc(24 * var(--u)) calc(20 * var(--u)) 0 calc(20 * var(--u));
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .nav-pill {
+    height: calc(42 * var(--u));
+    padding: 0 calc(4 * var(--u));
+  }
+
+  .nav-link {
+    font-size: calc(12.5 * var(--u));
+    padding: 0 calc(10 * var(--u));
+    height: calc(34 * var(--u));
+  }
+
+  .nav-sliding-pill {
+    height: calc(34 * var(--u));
+  }
+
+  /* WhatsApp devient un bouton carré de 40u à flèche */
+  .hero-top-right {
+    position: absolute;
+    right: calc(20 * var(--u));
+    top: calc(24 * var(--u));
+    gap: calc(10 * var(--u));
+    z-index: 25;
+  }
+
+  .hero-drop-date {
+    display: none;
+  }
+
+  .btn-whatsapp-hero {
+    width: calc(40 * var(--u));
+    height: calc(40 * var(--u));
+    border-radius: calc(10 * var(--u));
+    padding: 0;
+    justify-content: center;
+  }
+
+  .btn-whatsapp-hero span {
+    display: none;
+  }
+
+  .btn-whatsapp-hero .icon-arrow-diag {
+    width: calc(16 * var(--u));
+    height: calc(16 * var(--u));
+  }
+
+  /* 2. Titre, texte (À PROPOS) et Commander sur WhatsApp */
+  .hero-title-container {
+    position: relative;
+    left: auto;
+    top: auto;
+    order: 2;
+    padding: calc(30 * var(--u)) calc(20 * var(--u)) 0 calc(20 * var(--u));
+  }
+
+  .hero-title-line {
+    font-size: calc(72 * var(--u));
+  }
+
+  .hero-title-year {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-top: calc(4 * var(--u));
+    font-size: calc(22 * var(--u));
+  }
+
+  .hero-about-container {
+    position: relative;
+    left: auto;
+    top: auto;
+    order: 3;
+    max-width: 100%;
+    padding: calc(20 * var(--u)) calc(20 * var(--u)) 0 calc(20 * var(--u));
+  }
+
+  .hero-about-text {
+    font-size: calc(15 * var(--u));
+    margin-bottom: calc(18 * var(--u));
+  }
+
+  .btn-black-hero {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 3. Photo pleine largeur (470u) avec plaque de marque et livraison par-dessus */
+  .hero-photo-wrapper {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: calc(470 * var(--u));
+    order: 4;
+    margin-top: calc(30 * var(--u));
+    -webkit-mask-image: none;
+    mask-image: none;
+    pointer-events: auto;
+  }
+
+  .hero-brand-plate {
+    left: calc(20 * var(--u));
+    right: auto;
+    top: calc(180 * var(--u));
+    width: calc(350 * var(--u));
+    height: calc(64 * var(--u));
+    padding: 0 calc(16 * var(--u));
+  }
+
+  .brand-plate-name {
+    font-size: calc(20 * var(--u));
+  }
+
+  .hero-delivery-row {
+    left: calc(20 * var(--u));
+    right: auto;
+    top: auto;
+    bottom: calc(20 * var(--u));
+    width: calc(350 * var(--u));
+    justify-content: center;
+  }
+
+  /* 4. « Pièces vérifiées », cadre de stats (deux colonnes) et « Nouveau » */
+  .hero-right-column {
+    display: contents;
+  }
+
+  .verified-pill {
+    order: 5;
+    margin: calc(28 * var(--u)) calc(20 * var(--u)) 0 calc(20 * var(--u));
+    align-self: flex-start;
+  }
+
+  .hero-availability {
+    order: 5;
+    margin: calc(12 * var(--u)) calc(20 * var(--u)) 0 calc(20 * var(--u));
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  /* Cadre de stats mobile (2 colonnes) */
+  .hero-stats-frame {
+    position: relative;
+    left: auto;
+    top: auto;
+    order: 6;
+    width: calc(350 * var(--u));
+    height: auto;
+    margin: calc(20 * var(--u)) auto 0 auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-dark-card {
+    min-height: calc(190 * var(--u));
+  }
+
+  .stats-photo-card {
+    min-height: calc(190 * var(--u));
+  }
+
+  /* Carte Capsule Harmattan */
+  .harmattan-card {
+    order: 7;
+    width: calc(350 * var(--u));
+    margin: calc(24 * var(--u)) auto 0 auto;
+  }
+
+  .harmattan-img-container {
+    height: calc(220 * var(--u));
+  }
+
+  /* Barre intermédiaire mobile */
+  .editorial-divider-bar {
+    height: auto;
+    padding: calc(20 * var(--u));
+    flex-wrap: wrap;
+    gap: calc(12 * var(--u));
+    justify-content: space-between;
+  }
+
+  /* Section Manifeste mobile : 28u */
+  .manifesto-section {
+    padding-top: calc(80 * var(--u));
+    padding-bottom: calc(100 * var(--u));
+    padding-left: calc(20 * var(--u));
+    padding-right: calc(20 * var(--u));
+  }
+
+  .manifesto-content {
+    width: 100%;
+  }
+
+  .manifesto-text {
+    font-size: calc(28 * var(--u));
+    line-height: 1.35;
+  }
+
+  .manifesto-subline {
+    margin-top: calc(60 * var(--u));
+  }
+
+  .subline-text {
+    font-size: calc(17 * var(--u));
+  }
+
+  /* Panneau de confiance mobile */
+  .trust-section {
+    padding-bottom: calc(60 * var(--u));
+    padding-left: calc(20 * var(--u));
+    padding-right: calc(20 * var(--u));
+  }
+
+  .trust-panel {
+    width: 100%;
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: calc(30 * var(--u));
+    padding: calc(28 * var(--u)) calc(20 * var(--u));
+  }
+
+  .trust-heading {
+    font-size: calc(38 * var(--u));
+  }
+
+  .frosted-tile {
+    width: calc(56 * var(--u));
+    height: calc(56 * var(--u));
+  }
+
+  .frosted-tile svg {
+    width: calc(20 * var(--u));
+    height: calc(20 * var(--u));
+  }
+
+  /* Sur mobile : masquer la 2ème tuile en verre selon consigne */
+  .tile-dots {
+    display: none !important;
+  }
+
+  .trust-description {
+    max-width: 100%;
+    font-size: calc(14 * var(--u));
+  }
+
+  /* Empilement des cartes */
+  .trust-right-cards {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    gap: calc(16 * var(--u));
+  }
+
+  .trust-card {
+    height: auto;
+    min-height: calc(240 * var(--u));
+    width: 100% !important;
+  }
+
+  .card-avatars {
+    width: 100%;
+  }
+
+  .card-distinctions {
+    width: 100%;
+  }
+
+  .card-portrait {
+    display: none;
+  }
+
+  .site-footer {
+    width: 100%;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: calc(12 * var(--u));
+    text-align: center;
+  }
+}

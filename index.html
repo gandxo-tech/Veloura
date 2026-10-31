@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELOURA – Pièces uniques de friperie & mode urbaine · Cotonou</title>
+  <meta name="description" content="Friperie sélective et mode urbaine à Cotonou, Bénin. Pièces uniques triées à la main, vérifiées et livrées à Cotonou, Porto-Novo et Parakou.">
+  <meta property="og:title" content="VELOURA – Pièces uniques de friperie & mode urbaine · Cotonou">
+  <meta property="og:description" content="Boutique de friperie sélective et mode urbaine à Cotonou. Découvrez nos collections uniques et capsules exclusives.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Inter Tight & Archivo (axe variable wdth 62..125) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+  <script src="./images.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== SECTION 1: HERO ==================== -->
+  <header class="hero-section" id="accueil">
+    
+    <!-- Photo Hero avec masque latéral, parallaxe, plaque de marque et livraison -->
+    <div class="hero-photo-wrapper" id="hero-photo-wrapper">
+      <img id="hero-img" class="hero-photo-img" src="" alt="Silhouette de dos en veste oversize sombre VELOURA sur fond clair de studio">
+      
+      <!-- Plaque de marque en verre sombre sur le dos de la personne -->
+      <div class="hero-brand-plate hero-fade-item" id="brand-plate" aria-label="Plaque de marque VELOURA">
+        <div class="brand-plate-logo" aria-hidden="true">
+          <!-- Logo triangulaire géométrique en 2 parties -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 20L12 4L16 12H8L12 20H4Z" fill="#F4F4F4"/>
+            <path d="M16 14L19 20H13L16 14Z" fill="#A8A8A8"/>
+          </svg>
+        </div>
+        <span class="brand-plate-name">VELOURA</span>
+        <div class="brand-plate-menu-icon" aria-hidden="true">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </div>
+      </div>
+
+      <!-- Ligne de livraison sur le vêtement -->
+      <div class="hero-delivery-row hero-fade-item">
+        <span class="delivery-label">Livraison</span>
+        <span class="delivery-cities">Cotonou · Porto-Novo · Parakou</span>
+      </div>
+    </div>
+
+    <!-- Navigation pilule blanche segmentée -->
+    <nav class="hero-nav" id="hero-nav" aria-label="Navigation principale">
+      <div class="nav-pill" id="nav-pill">
+        <div class="nav-sliding-pill" id="nav-sliding-pill"></div>
+        <a href="#accueil" class="nav-link is-active" data-index="0">Accueil</a>
+        <a href="#boutique" class="nav-link" data-index="1">Boutique</a>
+        <a href="#lookbook" class="nav-link" data-index="2">Lookbook</a>
+        <a href="#contact" class="nav-link" data-index="3">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Haut droit : Date de prochain arrivage & Bouton WhatsApp -->
+    <div class="hero-top-right">
+      <div class="hero-drop-date hero-fade-item">
+        <span class="drop-label">Prochain arrivage</span>
+        <span class="drop-value">Samedi 07.11 – 2026</span>
+      </div>
+      <a href="https://wa.me/?text=Bonjour%2C%20je%20voudrais%20commander%20une%20pi%C3%A8ce" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn-whatsapp-hero hero-fade-item"
+         aria-label="Contacter sur WhatsApp">
+        <span>WhatsApp</span>
+        <svg class="icon-arrow-diag" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Titre PURE STYLE masqué pour animation de montée -->
+    <div class="hero-title-container">
+      <div class="title-mask-line">
+        <h1 class="hero-title-line title-line-1">PURE</h1>
+      </div>
+      <div class="title-mask-line">
+        <span class="hero-title-line title-line-2">STYLE</span>
+      </div>
+      <span class="hero-title-year hero-fade-item">(’26)</span>
+    </div>
+
+    <!-- Bloc À Propos & Bouton Commander -->
+    <div class="hero-about-container">
+      <div class="hero-about-tag hero-fade-item">
+        <span class="tag-dot" aria-hidden="true">●</span>
+        <span class="tag-text">(À PROPOS)</span>
+      </div>
+      <p class="hero-about-text hero-fade-item">
+        Pièces uniques triées à la main,<br>
+        pour que chaque style mérite d’être vu.
+      </p>
+      <a href="https://wa.me/?text=Bonjour%2C%20je%20voudrais%20commander%20une%20pi%C3%A8ce" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn-black-hero hero-fade-item">
+        <span>Commander sur WhatsApp</span>
+        <svg class="icon-arrow-diag" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Cadre de stats gris clair en bas à gauche -->
+    <div class="hero-stats-frame hero-fade-item" id="stats-frame">
+      <!-- Carte sombre 400+ clients -->
+      <div class="stats-dark-card">
+        <div class="stats-counter-row">
+          <span class="stats-number" id="counter-400">0+</span>
+          <span class="stats-label">Clients fidèles</span>
+        </div>
+        <!-- 6 pastilles de catégories -->
+        <div class="stats-categories-grid">
+          <span class="cat-pill"><span class="cat-glyph">🧥</span>Vestes</span>
+          <span class="cat-pill"><span class="cat-glyph">👖</span>Denim</span>
+          <span class="cat-pill"><span class="cat-glyph">👟</span>Sneakers</span>
+          <span class="cat-pill"><span class="cat-glyph">👜</span>Sacs</span>
+          <span class="cat-pill"><span class="cat-glyph">🕶️</span>Lunettes</span>
+          <span class="cat-pill"><span class="cat-glyph">⌚</span>Montres</span>
+        </div>
+        <a href="#boutique" class="stats-store-bar">
+          <span>Voir la boutique</span>
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 9.5L9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Carte photo 230+ pièces -->
+      <div class="stats-photo-card" id="card230-container">
+        <img id="card230-img" class="stats-card-img" src="" alt="Lookbook casquette noire">
+        <div class="stats-photo-card-overlay">
+          <div class="stats-photo-header">
+            <span class="lookbook-tag">Lookbook · 05/06</span>
+            <div class="lookbook-line" aria-hidden="true"></div>
+          </div>
+          <div class="stats-photo-footer">
+            <span class="photo-counter-num" id="counter-230">0+</span>
+            <span class="photo-counter-desc">Pièces uniques en stock cette semaine</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne droite : Pilule vérifiée, Disponibilité, Carte Capsule Harmattan -->
+    <div class="hero-right-column">
+      
+      <!-- Pilule givrée Pièces vérifiées -->
+      <div class="verified-pill hero-fade-item">
+        <span class="check-disc" aria-hidden="true">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 4L3.8 7L9 1" stroke="#FFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="verified-text">Pièces vérifiées</span>
+      </div>
+
+      <!-- Disponibilité WhatsApp alignée à droite -->
+      <div class="hero-availability hero-fade-item">
+        <div class="avail-line-1">Nous sommes disponibles</div>
+        <div class="avail-line-2">
+          <span class="avail-pulse-dot" aria-hidden="true">●</span>
+          <span>pour vous</span>
+        </div>
+      </div>
+
+      <!-- Carte Capsule Harmattan -->
+      <div class="harmattan-card hero-fade-item" id="harmattan-card">
+        <div class="harmattan-meta">
+          <span class="harmattan-badge">Nouveau</span>
+          <span class="harmattan-title">Capsule Harmattan</span>
+          <span class="harmattan-year">[2026]</span>
+        </div>
+        <div class="harmattan-img-container">
+          <img id="harmattan-img" class="harmattan-img" src="" alt="Capsule Harmattan VELOURA">
+          <a href="https://wa.me/?text=Bonjour%2C%20je%20voudrais%20commander%20une%20pi%C3%A8ce" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn-harmattan-round" 
+             aria-label="Découvrir la capsule Harmattan">
+            <svg class="harmattan-arrow" width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <!-- Ligne de progression Capsule Harmattan -->
+        <div class="harmattan-progress-wrapper" aria-hidden="true">
+          <div class="harmattan-progress-track">
+            <div class="harmattan-progress-fill" id="harmattan-progress-bar"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- ==================== SECTION 2: BARRE & MANIFESTE ==================== -->
+  <div class="manifesto-wrapper" id="boutique">
+    
+    <!-- Barre noire intermédiaire 111u -->
+    <div class="editorial-divider-bar">
+      <div class="bar-left">
+        <span class="bar-since">DEPUIS</span>
+        <span class="bar-year">2019</span>
+      </div>
+      <div class="bar-center">
+        <span class="bar-scroll-text">DÉFILER</span>
+        <span class="bar-scroll-circle" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 2V10M6 10L2.5 6.5M6 10L9.5 6.5" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="bar-right">
+        <span class="bar-tagline">VIS TON STYLE</span>
+      </div>
+    </div>
+
+    <!-- Section Manifeste textuelle -->
+    <section class="manifesto-section" id="manifesto-section" aria-label="Manifeste VELOURA">
+      <div class="manifesto-content">
+        <h2 class="manifesto-text" id="manifesto-text">
+          <!-- Les mots individuels sont générés en spans avec fond gris qui s'illumine en blanc -->
+        </h2>
+
+        <!-- Sous-ligne 150u plus bas -->
+        <div class="manifesto-subline">
+          <p class="subline-text">
+            Des pièces triées avec soin, de la<br>
+            sélection à la livraison. <em class="subline-italic-grey">Pensé pour ceux qui osent.</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==================== SECTION 3: PANNEAU DE CONFIANCE ==================== -->
+  <section class="trust-section" id="lookbook" aria-label="Panneau de confiance">
+    
+    <div class="trust-panel" id="trust-panel">
+      
+      <!-- Colonne gauche : Titre avec 2 tuiles en verre & paragraphe de réassurance -->
+      <div class="trust-left-column">
+        
+        <div class="trust-title-wrapper">
+          <h2 class="trust-heading">
+            <span class="title-line title-line-first">
+              Choisie par
+              <!-- Tuile 1 : astérisque en verre dépoli -->
+              <span class="frosted-tile tile-asterisk" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2V22M2 12H22M4.93 4.93L19.07 19.07M19.07 4.93L4.93 19.07" stroke="#F4F4F4" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </span>
+            <span class="title-line">des centaines</span>
+            <span class="title-line">de clients</span>
+            <span class="title-line title-line-last">
+              fidèles
+              <!-- Tuile 2 : 4 points en verre dépoli -->
+              <span class="frosted-tile tile-dots" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <circle cx="6" cy="6" r="2.5" fill="#F4F4F4"/>
+                  <circle cx="18" cy="6" r="2.5" fill="#F4F4F4"/>
+                  <circle cx="6" cy="18" r="2.5" fill="#F4F4F4"/>
+                  <circle cx="18" cy="18" r="2.5" fill="#F4F4F4"/>
+                </svg>
+              </span>
+            </span>
+          </h2>
+        </div>
+
+        <p class="trust-description">
+          Du vintage au streetwear, nos clients reviennent pour la qualité des pièces, 
+          les prix justes et un service réactif sur WhatsApp.
+        </p>
+
+      </div>
+
+      <!-- Colonne droite : Cartes de statistiques & portrait -->
+      <div class="trust-right-cards" id="trust-cards-group">
+        
+        <!-- Carte 1 : Avatars (gris clair #d6d6d6) -->
+        <div class="trust-card card-avatars" id="card-avatars">
+          <div class="avatars-grid" id="avatars-grid" aria-label="8 clients récents">
+            <div class="avatar-slot" data-index="0"></div>
+            <div class="avatar-slot" data-index="1"></div>
+            <div class="avatar-slot" data-index="2"></div>
+            <div class="avatar-slot" data-index="3"></div>
+            <div class="avatar-slot" data-index="4"></div>
+            <div class="avatar-slot" data-index="5"></div>
+            <div class="avatar-slot" data-index="6"></div>
+            <div class="avatar-slot" data-index="7"></div>
+          </div>
+          <div class="avatars-counter-block">
+            <span class="avatars-number" id="counter-12k">0+</span>
+            <span class="avatars-label">Clients & abonnés</span>
+          </div>
+        </div>
+
+        <!-- Carte 2 : Distinctions (#262626) -->
+        <div class="trust-card card-distinctions" id="card-distinctions">
+          <div class="distinctions-top">
+            <span class="distinctions-num" id="counter-10">0+</span>
+            <span class="distinctions-label">Années d’expérience</span>
+          </div>
+          
+          <div class="distinctions-badge" aria-label="Badge de distinction">
+            <!-- Couronne de laurier SVG soignée -->
+            <svg class="laurel-svg" width="46" height="46" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path d="M14 36C10 32 8 26 8 20C8 16 9.5 12 12 9M34 36C38 32 40 26 40 20C40 16 38.5 12 36 9" stroke="#E2E2E2" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12 18C14 16 17 17 18 19M36 18C34 16 31 17 30 19" stroke="#E2E2E2" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 26C12 24 16 26 16 28M38 26C36 24 32 26 32 28" stroke="#E2E2E2" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 33C17 32 19 35 18 37M34 33C31 32 29 35 30 37" stroke="#E2E2E2" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="3" fill="#E2E2E2"/>
+            </svg>
+            <span class="badge-title">COUP DE CŒUR STYLE 2026</span>
+          </div>
+
+          <p class="distinctions-note">
+            Pièces triées à la main,<br>
+            contrôlées une par une.
+          </p>
+        </div>
+
+        <!-- Carte 3 : Portrait coupée par le bord droit -->
+        <div class="trust-card card-portrait" id="card-portrait">
+          <img id="portrait-img" class="portrait-img" src="" alt="Portrait de profil VELOURA">
+          <div class="portrait-gradient-overlay" aria-hidden="true"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Pied de page discret & réassurance légale -->
+    <footer class="site-footer" id="contact">
+      <div class="footer-inner">
+        <span class="footer-brand">VELOURA COTONOU</span>
+        <span class="footer-demo-tag">Marque fictive – site de démonstration</span>
+        <a href="https://wa.me/?text=Bonjour%2C%20je%20voudrais%20commander%20une%20pi%C3%A8ce" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="footer-wa-link">
+          <span>Commander par WhatsApp</span>
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+  </section>
+
+</body>
+</html>
