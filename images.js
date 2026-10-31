@@ -6,33 +6,33 @@
 const IMAGES = {
   hero: {
     candidates: [
-      'https://images.unsplash.com/photo-1556821862-4b3fe13a6ce6?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1587003866373-7ab55655b099?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1556821862-4b3fe13a6ce6?auto=format&fit=crop&w=900&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1587003866373-7ab55655b099?auto=format&fit=crop&w=900&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=70&fm=webp'
     ],
     alt: 'Silhouette de dos en veste oversize sombre VELOURA sur fond clair de studio'
   },
   card230: {
     candidates: [
-      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1521341057461-6eb5f40b07ab?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=600&q=80'
+      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=480&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1521341057461-6eb5f40b07ab?auto=format&fit=crop&w=480&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=480&q=70&fm=webp'
     ],
     alt: 'Portrait en casquette noire, éclairage feutré monochrome'
   },
   harmattan: {
     candidates: [
-      'https://images.unsplash.com/photo-1759719440814-bbb8cc5422c4?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1787424325609-c1c8e188b00d?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=600&q=80'
+      'https://images.unsplash.com/photo-1759719440814-bbb8cc5422c4?auto=format&fit=crop&w=480&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1787424325609-c1c8e188b00d?auto=format&fit=crop&w=480&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=480&q=70&fm=webp'
     ],
     alt: 'Capsule Harmattan, silhouette textile abstraite en mouvement monochrome'
   },
   portrait: {
     candidates: [
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80'
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=480&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=480&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=480&q=70&fm=webp'
     ],
     alt: 'Profil de côté en t-shirt blanc minimaliste VELOURA'
   },
@@ -40,42 +40,42 @@ const IMAGES = {
     {
       name: 'Aïcha',
       initial: 'A',
-      url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Rodrigue',
       initial: 'R',
-      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Mireille',
       initial: 'M',
-      url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Koffi',
       initial: 'K',
-      url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Fadel',
       initial: 'F',
-      url: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Sena',
       initial: 'S',
-      url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Chloé',
       initial: 'C',
-      url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     },
     {
       name: 'Arnaud',
       initial: 'A',
-      url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=240&h=240&crop=faces&q=80'
+      url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=96&h=96&crop=faces&q=65&fm=webp'
     }
   ]
 };
@@ -107,11 +107,11 @@ const LOOKBOOK_PIECES = [
     ],
     deliveryNote: 'Commandez aujourd’hui : livrée sous 24 h à Cotonou et Calavi',
     candidates: [
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=70&fm=webp'
     ],
-    thumb: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=300&q=80'
+    thumb: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=160&h=160&q=60&fm=webp'
   },
   {
     id: 'look-2',
@@ -136,11 +136,11 @@ const LOOKBOOK_PIECES = [
     ],
     deliveryNote: 'Livraison avec essayage immédiat devant le livreur',
     candidates: [
-      'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=70&fm=webp'
     ],
-    thumb: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=300&q=80'
+    thumb: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=160&h=160&q=60&fm=webp'
   },
   {
     id: 'look-3',
@@ -165,11 +165,11 @@ const LOOKBOOK_PIECES = [
     ],
     deliveryNote: 'Échange de taille sans frais si essayage non concluant',
     candidates: [
-      'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=800&q=70&fm=webp'
     ],
-    thumb: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=300&q=80'
+    thumb: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=160&h=160&q=60&fm=webp'
   },
   {
     id: 'look-4',
@@ -194,11 +194,11 @@ const LOOKBOOK_PIECES = [
     ],
     deliveryNote: 'Livré sur cintre protecteur avec housse textile',
     candidates: [
-      'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=70&fm=webp'
     ],
-    thumb: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=300&q=80'
+    thumb: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=160&h=160&q=60&fm=webp'
   },
   {
     id: 'look-5',
@@ -223,11 +223,11 @@ const LOOKBOOK_PIECES = [
     ],
     deliveryNote: 'Paiement à la livraison après examen du molleton',
     candidates: [
-      'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=70&fm=webp'
     ],
-    thumb: 'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=300&q=80'
+    thumb: 'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=160&h=160&q=60&fm=webp'
   },
   {
     id: 'look-6',
@@ -252,16 +252,17 @@ const LOOKBOOK_PIECES = [
     ],
     deliveryNote: 'Emballée dans un pochon en coton écru réutilisable',
     candidates: [
-      'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=800&q=70&fm=webp',
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=70&fm=webp'
     ],
-    thumb: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=300&q=80'
+    thumb: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=160&h=160&q=60&fm=webp'
   }
 ];
 
 /**
  * Charge une image avec bascule automatique sur les URLs de secours en cas d'erreur
+ * et ajout de la classe .is-loaded pour un fondu fluide immédiat
  */
 function loadImageWithCandidates(imgElement, candidates, altText) {
   if (!imgElement || !candidates || !candidates.length) return;
@@ -271,11 +272,25 @@ function loadImageWithCandidates(imgElement, candidates, altText) {
     imgElement.alt = altText;
   }
 
+  imgElement.classList.remove('is-loaded');
+
   function tryNext() {
     if (candidateIndex < candidates.length) {
       const src = candidates[candidateIndex];
       candidateIndex++;
-      imgElement.src = src;
+
+      const preloader = new Image();
+      preloader.onload = function () {
+        imgElement.src = src;
+        imgElement.style.display = '';
+        requestAnimationFrame(() => {
+          imgElement.classList.add('is-loaded');
+        });
+      };
+      preloader.onerror = function () {
+        tryNext();
+      };
+      preloader.src = src;
     } else {
       // Toutes les URLs ont échoué : fond dégradé gris sans casser la mise en page
       imgElement.style.display = 'none';
@@ -285,8 +300,40 @@ function loadImageWithCandidates(imgElement, candidates, altText) {
     }
   }
 
-  imgElement.onerror = tryNext;
   tryNext();
+}
+
+/**
+ * Précharge en tâche de fond les photos du Lookbook pour une réactivité instantanée
+ */
+function prefetchLookbookImages() {
+  if (typeof LOOKBOOK_PIECES === 'undefined' || !LOOKBOOK_PIECES.length) return;
+
+  const preloadQueue = [];
+  LOOKBOOK_PIECES.forEach((piece) => {
+    if (piece.candidates && piece.candidates[0]) {
+      preloadQueue.push(piece.candidates[0]);
+    }
+    if (piece.thumb) {
+      preloadQueue.push(piece.thumb);
+    }
+  });
+
+  // Chargement échelonné pour préserver la bande passante principale
+  let idx = 0;
+  function loadNextBatch() {
+    if (idx >= preloadQueue.length) return;
+    const url = preloadQueue[idx++];
+    const img = new Image();
+    img.src = url;
+    setTimeout(loadNextBatch, 80);
+  }
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(loadNextBatch, { timeout: 1500 });
+  } else {
+    setTimeout(loadNextBatch, 500);
+  }
 }
 
 /**
@@ -311,7 +358,7 @@ function initImages() {
     loadImageWithCandidates(portraitImg, IMAGES.portrait.candidates, IMAGES.portrait.alt);
   }
 
-  // Avatars
+  // Avatars avec taille optimisée et cache
   const avatarElements = document.querySelectorAll('.avatar-slot');
   avatarElements.forEach((container, idx) => {
     const avatarData = IMAGES.avatars[idx];
@@ -321,6 +368,11 @@ function initImages() {
     img.className = 'avatar-img';
     img.alt = `Client ${avatarData.name}`;
     img.loading = 'lazy';
+    img.decoding = 'async';
+
+    img.onload = function () {
+      img.classList.add('is-loaded');
+    };
 
     img.onerror = function () {
       img.remove();
@@ -334,6 +386,9 @@ function initImages() {
     container.innerHTML = '';
     container.appendChild(img);
   });
+
+  // Lancer le préchargement en arrière-plan des photos lookbook
+  prefetchLookbookImages();
 }
 
 // Initialisation dès que le DOM est prêt

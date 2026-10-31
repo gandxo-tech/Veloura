@@ -14,6 +14,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 
+  <!-- Preload de l'image Hero compressée au format WebP pour affichage instantané -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1556821862-4b3fe13a6ce6?auto=format&fit=crop&w=900&q=70&fm=webp" fetchpriority="high">
+
   <link rel="stylesheet" href="./style.css">
   <script src="./images.js" defer></script>
   <script src="./script.js" defer></script>
@@ -25,7 +28,7 @@
     
     <!-- Photo Hero avec masque latéral, parallaxe, plaque de marque et livraison -->
     <div class="hero-photo-wrapper" id="hero-photo-wrapper">
-      <img id="hero-img" class="hero-photo-img" src="" alt="Silhouette de dos en veste oversize sombre VELOURA sur fond clair de studio">
+      <img id="hero-img" class="hero-photo-img" src="" alt="Silhouette de dos en veste oversize sombre VELOURA sur fond clair de studio" fetchpriority="high" decoding="async">
       
       <!-- Plaque de marque en verre sombre sur le dos de la personne -->
       <div class="hero-brand-plate hero-fade-item" id="brand-plate" aria-label="Plaque de marque VELOURA">
@@ -229,13 +232,13 @@
 
     <!-- Section Manifeste textuelle -->
     <section class="manifesto-section" id="manifesto-section" aria-label="Manifeste VELOURA">
-      <div class="manifesto-content">
+      <div class="manifesto-content reveal-on-scroll">
         <h2 class="manifesto-text" id="manifesto-text">
           <!-- Les mots individuels sont générés en spans avec fond gris qui s'illumine en blanc -->
         </h2>
 
         <!-- Sous-ligne 150u plus bas -->
-        <div class="manifesto-subline">
+        <div class="manifesto-subline reveal-on-scroll reveal-delay-2">
           <p class="subline-text">
             Des pièces triées avec soin, de la<br>
             sélection à la livraison. <em class="subline-italic-grey">Pensé pour ceux qui osent.</em>
@@ -251,7 +254,7 @@
     <div class="lookbook-inner">
       
       <!-- En-tête éditorial du Lookbook -->
-      <div class="lookbook-header">
+      <div class="lookbook-header reveal-on-scroll">
         <div class="lookbook-header-left">
           <div class="lookbook-tag-pill">
             <span class="tag-dot" aria-hidden="true">●</span>
@@ -264,7 +267,7 @@
         </div>
 
         <!-- Filtres par catégorie -->
-        <div class="lookbook-filter-bar" id="lookbook-filters" role="tablist" aria-label="Catégories du Lookbook">
+        <div class="lookbook-filter-bar reveal-on-scroll reveal-delay-1" id="lookbook-filters" role="tablist" aria-label="Catégories du Lookbook">
           <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">
             Toutes les pièces (6)
           </button>
@@ -281,7 +284,7 @@
       </div>
 
       <!-- Scène interactive du Carrousel -->
-      <div class="lookbook-carousel-container" id="lookbook-carousel" aria-roledescription="carousel" aria-label="Sélection des looks VELOURA">
+      <div class="lookbook-carousel-container reveal-on-scroll reveal-delay-2" id="lookbook-carousel" aria-roledescription="carousel" aria-label="Sélection des looks VELOURA">
         
         <!-- Barre de contrôle supérieure : Compteur et Boutons Précédent/Suivant -->
         <div class="carousel-top-bar">

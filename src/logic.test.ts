@@ -7,7 +7,10 @@ import {
   formatCounterValue,
   getNextSlideIndex,
   formatSlideCounter,
-  generateWhatsAppOrderUrl
+  generateWhatsAppOrderUrl,
+  compressUnsplashUrl,
+  calculateStaggerDelay,
+  calculateHeroEntranceTransform
 } from './logic';
 
 test('calculateWordLighting transitions smoothly with soft edge', () => {
@@ -64,5 +67,33 @@ test('generateWhatsAppOrderUrl creates encoded WhatsApp intent URL with piece na
   const url = generateWhatsAppOrderUrl('Veste Tailoring Oversize', 'VEL-01');
   assert.ok(url.startsWith('https://wa.me/?text=Bonjour%2C%20je%20souhaite%20commander%20la%20pi%C3%A8ce%20%3A%20'));
   assert.ok(url.includes('VEL-01'));
+});
+
+test('compressUnsplashUrl converts URLs to lightweight WebP format with given dimensions', () => {
+  const raw = 'https://images.unsplash.com/photo-1556821862-4b3fe13a6ce6?auto=format&fit=crop&w=1200&q=80';
+  const compressed = compressUnsplashUrl(raw, 900, 70);
+  assert.equal(compressed, 'https://images.unsplash.com/photo-1556821862-4b3fe13a6ce6?auto=format&fit=crop&w=900&q=70&fm=webp');
+
+  const avatar = compressUnsplashUrl(raw, 100, 65, 100);
+  assert.equal(avatar, 'https://images.unsplash.com/photo-1556821862-4b3fe13a6ce6?auto=format&fit=crop&w=100&q=65&fm=webp&h=100');
+});
+
+test('calculateStaggerDelay produces correctly incremental delays', () => {
+  assert.equal(calculateStaggerDelay(0, 100, 80), 100);
+  assert.equal(calculateStaggerDelay(2, 100, 80), 260);
+});
+
+test('calculateHeroEntranceTransform starts at -70 translateY with 0 opacity and finishes at 0 with 1 opacity', () => {
+  const start = calculateHeroEntranceTransform(0, -70);
+  assert.equal(start.translateY, -70);
+  assert.equal(start.opacity, 0);
+
+  const end = calculateHeroEntranceTransform(1, -70);
+  assert.equal(end.translateY, 0);
+  assert.equal(end.opacity, 1);
+
+  const mid = calculateHeroEntranceTransform(0.5, -70);
+  assert.ok(mid.translateY > -70 && mid.translateY < 0);
+  assert.ok(mid.opacity > 0 && mid.opacity <= 1);
 });
 

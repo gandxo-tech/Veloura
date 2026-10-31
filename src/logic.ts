@@ -76,3 +76,41 @@ export function generateWhatsAppOrderUrl(pieceTitle: string, pieceRef: string): 
   return `https://wa.me/?text=${encodeURIComponent(text)}`;
 }
 
+export function compressUnsplashUrl(
+  url: string,
+  width: number,
+  quality: number = 70,
+  height?: number
+): string {
+  if (!url || !url.includes('images.unsplash.com')) return url;
+  // Strip existing dimensions & quality queries
+  const baseUrl = url.split('?')[0];
+  let params = `auto=format&fit=crop&w=${width}&q=${quality}&fm=webp`;
+  if (height) {
+    params += `&h=${height}`;
+  }
+  return `${baseUrl}?${params}`;
+}
+
+export function calculateStaggerDelay(
+  index: number,
+  baseDelay: number = 100,
+  stepDelay: number = 80
+): number {
+  return baseDelay + index * stepDelay;
+}
+
+export function calculateHeroEntranceTransform(
+  progress: number,
+  startY: number = -70
+): { translateY: number; opacity: number } {
+  const p = Math.max(0, Math.min(1, progress));
+  // Ease-out cubic calculation
+  const eased = 1 - Math.pow(1 - p, 3);
+  const rawY = Math.round(startY * (1 - eased));
+  return {
+    translateY: rawY === 0 ? 0 : rawY,
+    opacity: Number((p * (2 - p)).toFixed(3))
+  };
+}
+

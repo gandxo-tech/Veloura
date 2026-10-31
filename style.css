@@ -65,6 +65,30 @@ img {
 /* Règle absolue du prompt : toutes les photos forcées en N&B */
 img, .hero-photo-img, .stats-card-img, .harmattan-img, .portrait-img, .avatar-img {
   filter: grayscale(1) contrast(1.05);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Progressive loading skeleton shimmer */
+.carousel-visual-box, .stats-photo-card, .harmattan-img-container, .card-portrait, .avatar-slot {
+  background: linear-gradient(135deg, #181818 0%, #111111 100%);
+  position: relative;
+}
+
+.carousel-visual-box::before, .stats-photo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmerPlaceholder 2.4s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shimmerPlaceholder {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Fallback gradient si chargement impossible */
@@ -2264,4 +2288,173 @@ img, .hero-photo-img, .stats-card-img, .harmattan-img, .portrait-img, .avatar-im
     gap: calc(12 * var(--u));
     text-align: center;
   }
+}
+
+/* ==================== ANIMATIONS D'ENTRÉE AU SCROLL ==================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.12s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.24s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==================== MICRO-ANIMATIONS RAFFINÉES ==================== */
+/* 1. Boutons CTA : micro-déplacement de la flèche diagonale et compression active */
+.btn-whatsapp-hero,
+.btn-black-hero,
+.btn-order-whatsapp,
+.btn-video-whatsapp,
+.stats-store-bar,
+.footer-wa-link {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.btn-whatsapp-hero .icon-arrow-diag,
+.btn-black-hero .icon-arrow-diag,
+.btn-order-whatsapp .icon-arrow-diag,
+.stats-store-bar svg,
+.footer-wa-link svg {
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-whatsapp-hero:hover .icon-arrow-diag,
+.btn-black-hero:hover .icon-arrow-diag,
+.btn-order-whatsapp:hover .icon-arrow-diag,
+.footer-wa-link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.stats-store-bar:hover svg {
+  transform: translate(2.5px, -2.5px);
+}
+
+.btn-whatsapp-hero:active,
+.btn-black-hero:active,
+.btn-order-whatsapp:active,
+.btn-video-whatsapp:active,
+.filter-btn:active,
+.thumb-card:active {
+  transform: scale(0.97) !important;
+}
+
+/* 2. Micro-reflet lumineux discret sur les boutons principaux */
+.btn-order-whatsapp::after,
+.btn-black-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  transition: 0.65s ease;
+  pointer-events: none;
+}
+
+.btn-order-whatsapp:hover::after,
+.btn-black-hero:hover::after {
+  left: 140%;
+}
+
+/* 3. Boutons de carrousel (Prev / Next) avec micro-mouvement de chevron */
+.carousel-nav-btn {
+  transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.carousel-nav-btn svg {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.carousel-nav-btn.btn-prev:hover svg {
+  transform: translateX(-3px);
+}
+
+.carousel-nav-btn.btn-next:hover svg {
+  transform: translateX(3px);
+}
+
+/* 4. Filtres de catégorie : micro-élévation et contour lumineux */
+.filter-btn {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* 5. Miniatures du Lookbook : micro-zoom image et indicateur de sélection */
+.thumb-card {
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.26s ease;
+}
+
+.thumb-card .thumb-img {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.thumb-card:hover .thumb-img {
+  transform: scale(1.08);
+}
+
+.thumb-card.is-active {
+  position: relative;
+}
+
+.thumb-card.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: calc(12 * var(--u));
+  right: calc(12 * var(--u));
+  height: 2px;
+  background: var(--white);
+  border-radius: 1px;
+}
+
+/* 6. Plaque de marque VELOURA sur le dos : micro-interaction au survol */
+.hero-brand-plate {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hero-brand-plate:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 calc(16 * var(--u)) calc(40 * var(--u)) rgba(0, 0, 0, 0.5);
+}
+
+/* 7. Pastille de vérification et disponibilité */
+.verified-pill {
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.verified-pill:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(0, 0, 0, 0.1);
 }

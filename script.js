@@ -101,7 +101,7 @@ function animateHeroTitle() {
 }
 
 /**
- * ANIMATION 2 : Photo du hero monte de 40px, se dé-floute et fondu (1.3 s)
+ * ANIMATION 2 : Photo du hero quitte le haut en fade opacity et glisse vers le bas (1.35 s)
  */
 function animateHeroPhoto() {
   const photoWrapper = document.getElementById('hero-photo-wrapper');
@@ -115,31 +115,40 @@ function animateHeroPhoto() {
     return;
   }
 
-  photoWrapper.animate(
+  // Glissade élégante depuis le haut (-70px vers 0)
+  const wrapperAnim = photoWrapper.animate(
     [
-      { transform: 'translateY(40px)' },
-      { transform: 'translateY(0px)' }
+      { transform: 'translate3d(0, -70px, 0)' },
+      { transform: 'translate3d(0, 0px, 0)' }
     ],
     {
-      duration: 1300,
+      duration: 1350,
       easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
       fill: 'forwards'
     }
   );
 
+  wrapperAnim.onfinish = () => {
+    // Permet au scroll parallax de prendre le relais sans à-coup
+    photoWrapper.style.transform = 'translate3d(0, 0px, 0)';
+  };
+
+  // Fondu d'opacité, légère dé-focalisation et ajustement d'échelle doux
   photoImg.animate(
     [
       {
         opacity: 0,
-        filter: 'grayscale(1) contrast(1.08) brightness(1.06) blur(20px)'
+        transform: 'scale(1.05)',
+        filter: 'grayscale(1) contrast(1.08) brightness(1.06) blur(14px)'
       },
       {
         opacity: 1,
+        transform: 'scale(1.0)',
         filter: 'grayscale(1) contrast(1.08) brightness(1.06) blur(0px)'
       }
     ],
     {
-      duration: 1300,
+      duration: 1350,
       easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
       fill: 'forwards'
     }
@@ -637,14 +646,16 @@ function updateLookbookSlide(index, animate = true) {
     }
   }
 
-  // Mise à jour de l'état actif des miniatures
+  // Mise à jour de l'état actif des miniatures (sans faire défiler la fenêtre entière)
   const thumbCards = document.querySelectorAll('.thumb-card');
+  const strip = document.getElementById('carousel-thumbs');
   thumbCards.forEach((thumb, idx) => {
     const isActive = idx === currentLookbookIndex;
     thumb.classList.toggle('is-active', isActive);
     thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    if (isActive) {
-      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if (isActive && animate && strip) {
+      const targetLeft = thumb.offsetLeft - (strip.clientWidth / 2) + (thumb.clientWidth / 2);
+      strip.scrollTo({ left: targetLeft, behavior: 'smooth' });
     }
   });
 }
@@ -824,6 +835,34 @@ function setupLookbookCarousel() {
 }
 
 /**
+ * ANIMATION D'ENTRÉE AU SCROLL : Sections Manifeste et Lookbook
+ * Fade-in fluide étagé à l'entrée dans la zone de lecture
+ */
+function setupScrollRevealObserver() {
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if (!revealElements.length) return;
+
+  if (PREFERS_REDUCED_MOTION) {
+    revealElements.forEach(el => el.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
+/**
  * Lancement général après chargement du DOM
  */
 function initVelouraApp() {
@@ -831,6 +870,7 @@ function initVelouraApp() {
   setupNavHoverSlider();
   setupHoverClasses();
   setupLookbookCarousel();
+  setupScrollRevealObserver();
 
   if (PREFERS_REDUCED_MOTION) {
     handleReducedMotionFallback();
