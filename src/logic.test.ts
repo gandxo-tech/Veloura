@@ -4,7 +4,10 @@ import {
   calculateWordLighting,
   interpolateColor,
   calculateParallax,
-  formatCounterValue
+  formatCounterValue,
+  getNextSlideIndex,
+  formatSlideCounter,
+  generateWhatsAppOrderUrl
 } from './logic';
 
 test('calculateWordLighting transitions smoothly with soft edge', () => {
@@ -43,3 +46,23 @@ test('formatCounterValue displays progressive values and clamps target', () => {
   assert.equal(formatCounterValue(230.4, 230, '+'), '230+');
   assert.equal(formatCounterValue(245, 230, '+'), '230+');
 });
+
+test('getNextSlideIndex wraps correctly around boundaries', () => {
+  const total = 6;
+  assert.equal(getNextSlideIndex(0, total, 'next'), 1);
+  assert.equal(getNextSlideIndex(5, total, 'next'), 0);
+  assert.equal(getNextSlideIndex(0, total, 'prev'), 5);
+  assert.equal(getNextSlideIndex(3, total, 'prev'), 2);
+});
+
+test('formatSlideCounter formats 2-digit padded strings', () => {
+  assert.equal(formatSlideCounter(0, 6), '01 / 06');
+  assert.equal(formatSlideCounter(4, 6), '05 / 06');
+});
+
+test('generateWhatsAppOrderUrl creates encoded WhatsApp intent URL with piece name and ref', () => {
+  const url = generateWhatsAppOrderUrl('Veste Tailoring Oversize', 'VEL-01');
+  assert.ok(url.startsWith('https://wa.me/?text=Bonjour%2C%20je%20souhaite%20commander%20la%20pi%C3%A8ce%20%3A%20'));
+  assert.ok(url.includes('VEL-01'));
+});
+

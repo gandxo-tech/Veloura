@@ -52,3 +52,27 @@ export function formatCounterValue(
   }
   return `${rounded}${suffix}`;
 }
+
+export function getNextSlideIndex(
+  currentIndex: number,
+  totalSlides: number,
+  direction: 'next' | 'prev'
+): number {
+  if (totalSlides <= 0) return 0;
+  if (direction === 'next') {
+    return (currentIndex + 1) % totalSlides;
+  }
+  return (currentIndex - 1 + totalSlides) % totalSlides;
+}
+
+export function formatSlideCounter(index: number, total: number): string {
+  const paddedIndex = String(index + 1).padStart(2, '0');
+  const paddedTotal = String(total).padStart(2, '0');
+  return `${paddedIndex} / ${paddedTotal}`;
+}
+
+export function generateWhatsAppOrderUrl(pieceTitle: string, pieceRef: string): string {
+  const text = `Bonjour, je souhaite commander la pièce : ${pieceTitle} (${pieceRef})`;
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+

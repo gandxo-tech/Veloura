@@ -523,12 +523,314 @@ function handleReducedMotionFallback() {
 }
 
 /**
+ * =========================================================================
+ * GALERIE LOOKBOOK CARROUSEL AVEC TRANSITIONS FLUIDES
+ * =========================================================================
+ */
+let currentLookbookIndex = 0;
+let currentLookbookFilter = 'all';
+let lookbookAutoplayTimer = null;
+let touchStartX = 0;
+let touchEndX = 0;
+
+function renderLookbookThumbnails() {
+  const container = document.getElementById('carousel-thumbs');
+  if (!container || typeof LOOKBOOK_PIECES === 'undefined') return;
+
+  container.innerHTML = '';
+  LOOKBOOK_PIECES.forEach((piece, index) => {
+    const card = document.createElement('div');
+    card.className = `thumb-card ${index === currentLookbookIndex ? 'is-active' : ''}`;
+    card.setAttribute('role', 'tab');
+    card.setAttribute('aria-selected', index === currentLookbookIndex ? 'true' : 'false');
+    card.setAttribute('data-index', String(index));
+    card.setAttribute('tabindex', '0');
+
+    card.innerHTML = `
+      <img src="${piece.thumb}" alt="${piece.title}" class="thumb-img" loading="lazy">
+      <div class="thumb-meta">
+        <span class="thumb-ref">${piece.ref}</span>
+        <span class="thumb-title">${piece.title}</span>
+        <span class="thumb-price">${piece.priceFormatted}</span>
+      </div>
+    `;
+
+    card.addEventListener('click', () => {
+      goToLookbookSlide(index);
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        goToLookbookSlide(index);
+      }
+    });
+
+    container.appendChild(card);
+  });
+}
+
+function updateLookbookSlide(index, animate = true) {
+  if (typeof LOOKBOOK_PIECES === 'undefined' || !LOOKBOOK_PIECES.length) return;
+  const total = LOOKBOOK_PIECES.length;
+  currentLookbookIndex = (index + total) % total;
+  const piece = LOOKBOOK_PIECES[currentLookbookIndex];
+
+  // Compteur et statut
+  const counterEl = document.getElementById('carousel-counter-num');
+  const statusEl = document.getElementById('carousel-status-pill');
+  const progressEl = document.getElementById('carousel-progress-fill');
+
+  if (counterEl) {
+    const paddedIndex = String(currentLookbookIndex + 1).padStart(2, '0');
+    const paddedTotal = String(total).padStart(2, '0');
+    counterEl.textContent = `${paddedIndex} / ${paddedTotal}`;
+  }
+  if (statusEl) {
+    statusEl.textContent = piece.edition || 'Pièce unique (1/1)';
+  }
+  if (progressEl) {
+    const pct = ((currentLookbookIndex + 1) / total) * 100;
+    progressEl.style.width = `${pct}%`;
+  }
+
+  // Éléments de l'image
+  const mainImg = document.getElementById('carousel-main-img');
+  const watermarkRef = document.getElementById('photo-watermark-ref');
+  const watermarkBadge = document.getElementById('photo-watermark-badge');
+  const detailsBox = document.getElementById('carousel-details-box');
+
+  if (watermarkRef) watermarkRef.textContent = `REF. ${piece.ref}`;
+  if (watermarkBadge) watermarkBadge.textContent = piece.badge || '1/1 UNIQUE';
+
+  // Transition d'image avec fondu fluide
+  if (mainImg) {
+    if (animate && !PREFERS_REDUCED_MOTION) {
+      mainImg.style.opacity = '0';
+      mainImg.style.transform = 'scale(0.97)';
+      setTimeout(() => {
+        loadImageWithCandidates(mainImg, piece.candidates, piece.title);
+        mainImg.style.opacity = '1';
+        mainImg.style.transform = 'scale(1)';
+      }, 180);
+    } else {
+      loadImageWithCandidates(mainImg, piece.candidates, piece.title);
+      mainImg.style.opacity = '1';
+      mainImg.style.transform = 'scale(1)';
+    }
+  }
+
+  // Transition de la fiche détaillée
+  if (detailsBox && animate && !PREFERS_REDUCED_MOTION) {
+    detailsBox.style.opacity = '0.3';
+    detailsBox.style.transform = 'translateY(6px)';
+    setTimeout(() => {
+      applyLookbookDetailsContent(piece);
+      detailsBox.style.opacity = '1';
+      detailsBox.style.transform = 'translateY(0)';
+    }, 120);
+  } else {
+    applyLookbookDetailsContent(piece);
+    if (detailsBox) {
+      detailsBox.style.opacity = '1';
+      detailsBox.style.transform = 'translateY(0)';
+    }
+  }
+
+  // Mise à jour de l'état actif des miniatures
+  const thumbCards = document.querySelectorAll('.thumb-card');
+  thumbCards.forEach((thumb, idx) => {
+    const isActive = idx === currentLookbookIndex;
+    thumb.classList.toggle('is-active', isActive);
+    thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    if (isActive) {
+      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  });
+}
+
+function applyLookbookDetailsContent(piece) {
+  const categoryEl = document.getElementById('details-category');
+  const sizeEl = document.getElementById('details-size');
+  const titleEl = document.getElementById('details-title');
+  const taglineEl = document.getElementById('details-tagline');
+  const priceEl = document.getElementById('details-price');
+  const oldPriceEl = document.getElementById('details-old-price');
+  const savingsEl = document.getElementById('details-savings');
+  const descEl = document.getElementById('details-desc');
+  const bulletsEl = document.getElementById('details-bullets');
+  const deliveryEl = document.getElementById('details-delivery');
+  const btnWhatsapp = document.getElementById('btn-details-whatsapp');
+  const btnVideo = document.getElementById('btn-details-video');
+
+  if (categoryEl) categoryEl.textContent = piece.categoryLabel;
+  if (sizeEl) sizeEl.textContent = piece.size;
+  if (titleEl) titleEl.textContent = piece.title;
+  if (taglineEl) taglineEl.textContent = piece.tagline;
+  if (priceEl) priceEl.textContent = piece.priceFormatted;
+  if (oldPriceEl) oldPriceEl.textContent = piece.oldPriceFormatted;
+  if (savingsEl) savingsEl.textContent = `Vous économisez ${piece.savings}`;
+  if (descEl) descEl.textContent = piece.description;
+
+  if (bulletsEl && piece.bullets) {
+    bulletsEl.innerHTML = piece.bullets.map(b => `<li>${b}</li>`).join('');
+  }
+  if (deliveryEl) deliveryEl.textContent = piece.deliveryNote;
+
+  if (btnWhatsapp) {
+    const msg = `Bonjour, je souhaite commander la pièce : ${piece.title} (${piece.ref})`;
+    btnWhatsapp.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  }
+
+  if (btnVideo) {
+    const videoMsg = `Bonjour, pouvez-vous m'envoyer une vidéo de détail pour la pièce : ${piece.title} (${piece.ref}) ?`;
+    btnVideo.href = `https://wa.me/?text=${encodeURIComponent(videoMsg)}`;
+  }
+}
+
+function goToLookbookSlide(index) {
+  updateLookbookSlide(index, true);
+  restartLookbookAutoplay();
+}
+
+function nextLookbookSlide() {
+  if (typeof LOOKBOOK_PIECES === 'undefined' || !LOOKBOOK_PIECES.length) return;
+  goToLookbookSlide((currentLookbookIndex + 1) % LOOKBOOK_PIECES.length);
+}
+
+function prevLookbookSlide() {
+  if (typeof LOOKBOOK_PIECES === 'undefined' || !LOOKBOOK_PIECES.length) return;
+  goToLookbookSlide((currentLookbookIndex - 1 + LOOKBOOK_PIECES.length) % LOOKBOOK_PIECES.length);
+}
+
+function startLookbookAutoplay() {
+  if (IS_RECORD_MODE || PREFERS_REDUCED_MOTION) return;
+  stopLookbookAutoplay();
+  lookbookAutoplayTimer = setInterval(() => {
+    nextLookbookSlide();
+  }, 6500);
+}
+
+function stopLookbookAutoplay() {
+  if (lookbookAutoplayTimer) {
+    clearInterval(lookbookAutoplayTimer);
+    lookbookAutoplayTimer = null;
+  }
+}
+
+function restartLookbookAutoplay() {
+  stopLookbookAutoplay();
+  startLookbookAutoplay();
+}
+
+function setupLookbookCarousel() {
+  renderLookbookThumbnails();
+  updateLookbookSlide(0, false);
+
+  const btnPrev = document.getElementById('btn-carousel-prev');
+  const btnNext = document.getElementById('btn-carousel-next');
+  const container = document.getElementById('lookbook-carousel');
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      prevLookbookSlide();
+    });
+  }
+
+  if (btnNext) {
+    btnNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      nextLookbookSlide();
+    });
+  }
+
+  // Filtrage par catégorie
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filter = btn.getAttribute('data-filter');
+      currentLookbookFilter = filter;
+
+      if (filter === 'all') {
+        goToLookbookSlide(0);
+      } else {
+        const foundIdx = LOOKBOOK_PIECES.findIndex(p => p.category === filter);
+        if (foundIdx !== -1) {
+          goToLookbookSlide(foundIdx);
+        }
+      }
+    });
+  });
+
+  // Pause au survol du conteneur
+  if (container) {
+    container.addEventListener('mouseenter', stopLookbookAutoplay);
+    container.addEventListener('mouseleave', startLookbookAutoplay);
+
+    // Support tactile (swipe)
+    container.addEventListener('touchstart', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+        stopLookbookAutoplay();
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          if (diff < 0) {
+            nextLookbookSlide();
+          } else {
+            prevLookbookSlide();
+          }
+        }
+        startLookbookAutoplay();
+      }
+    }, { passive: true });
+  }
+
+  // Navigation clavier gauche/droite
+  window.addEventListener('keydown', (e) => {
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+    const lookbookSec = document.getElementById('lookbook');
+    if (lookbookSec) {
+      const rect = lookbookSec.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) {
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nextLookbookSlide();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevLookbookSlide();
+        }
+      }
+    }
+  });
+
+  startLookbookAutoplay();
+}
+
+/**
  * Lancement général après chargement du DOM
  */
 function initVelouraApp() {
   setupManifestoWords();
   setupNavHoverSlider();
   setupHoverClasses();
+  setupLookbookCarousel();
 
   if (PREFERS_REDUCED_MOTION) {
     handleReducedMotionFallback();
@@ -558,3 +860,4 @@ if (document.readyState === 'loading') {
 } else {
   initVelouraApp();
 }
+

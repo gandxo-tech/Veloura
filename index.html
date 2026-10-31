@@ -246,8 +246,183 @@
 
   </div>
 
-  <!-- ==================== SECTION 3: PANNEAU DE CONFIANCE ==================== -->
-  <section class="trust-section" id="lookbook" aria-label="Panneau de confiance">
+  <!-- ==================== SECTION 3: GALERIE LOOKBOOK CARROUSEL ==================== -->
+  <section class="lookbook-section" id="lookbook" aria-label="Galerie Lookbook VELOURA">
+    <div class="lookbook-inner">
+      
+      <!-- En-tête éditorial du Lookbook -->
+      <div class="lookbook-header">
+        <div class="lookbook-header-left">
+          <div class="lookbook-tag-pill">
+            <span class="tag-dot" aria-hidden="true">●</span>
+            <span class="lookbook-tag-text">(LOOKBOOK // SÉLECTION AUTOMNE-HIVER ’26)</span>
+          </div>
+          <h2 class="lookbook-main-title">PIÈCES UNIQUES · ÉDITION LIMITÉE</h2>
+          <p class="lookbook-subtitle">
+            Chaque modèle est chiné, inspecté sous lumière blanche et proposé en un seul exemplaire à Cotonou. Essayage sans frais à la livraison.
+          </p>
+        </div>
+
+        <!-- Filtres par catégorie -->
+        <div class="lookbook-filter-bar" id="lookbook-filters" role="tablist" aria-label="Catégories du Lookbook">
+          <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">
+            Toutes les pièces (6)
+          </button>
+          <button class="filter-btn" data-filter="vestes" role="tab" aria-selected="false">
+            Vestes & Tailoring
+          </button>
+          <button class="filter-btn" data-filter="streetwear" role="tab" aria-selected="false">
+            Streetwear & Denim
+          </button>
+          <button class="filter-btn" data-filter="accessoires" role="tab" aria-selected="false">
+            Accessoires & Cuir
+          </button>
+        </div>
+      </div>
+
+      <!-- Scène interactive du Carrousel -->
+      <div class="lookbook-carousel-container" id="lookbook-carousel" aria-roledescription="carousel" aria-label="Sélection des looks VELOURA">
+        
+        <!-- Barre de contrôle supérieure : Compteur et Boutons Précédent/Suivant -->
+        <div class="carousel-top-bar">
+          <div class="carousel-counter-block">
+            <span class="carousel-counter-current" id="carousel-counter-num">01 / 06</span>
+            <span class="carousel-status-pill" id="carousel-status-pill">Pièce unique (1/1)</span>
+          </div>
+
+          <div class="carousel-progress-track">
+            <div class="carousel-progress-fill" id="carousel-progress-fill"></div>
+          </div>
+          
+          <div class="carousel-nav-buttons">
+            <button class="carousel-nav-btn btn-prev" id="btn-carousel-prev" aria-label="Pièce précédente">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button class="carousel-nav-btn btn-next" id="btn-carousel-next" aria-label="Pièce suivante">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Corps du Carrousel : Scène d'image (Gauche) & Carte Fiche Produit (Droite) -->
+        <div class="carousel-stage">
+          
+          <!-- Scène visuelle avec transition fluide -->
+          <div class="carousel-visual-box" id="carousel-visual-box">
+            <div class="carousel-image-frame" id="carousel-image-frame">
+              <img id="carousel-main-img" class="carousel-main-img" src="" alt="Lookbook VELOURA" loading="eager">
+              <div class="carousel-photo-overlay" aria-hidden="true"></div>
+            </div>
+
+            <!-- Badges superposés sur la photo -->
+            <div class="photo-watermark-top">
+              <span class="watermark-ref" id="photo-watermark-ref">REF. VEL-01</span>
+              <span class="watermark-badge" id="photo-watermark-badge">1/1 UNIQUE</span>
+            </div>
+
+            <div class="photo-watermark-bottom">
+              <span class="watermark-origin">COTTON SELECTION · ARCHIVES COTONOU</span>
+            </div>
+          </div>
+
+          <!-- Fiche produit éditoriale (Droite) -->
+          <div class="carousel-details-box" id="carousel-details-box">
+            
+            <div class="details-header">
+              <div class="details-meta-row">
+                <span class="details-category-badge" id="details-category">Vestes & Tailoring</span>
+                <span class="details-size-badge" id="details-size">Taille L (coupe boxy)</span>
+              </div>
+              <h3 class="details-title" id="details-title">Veste Tailoring Oversize Japonaise</h3>
+              <p class="details-tagline" id="details-tagline">Laine vierge peignée 420g/m² & tombé d’épaule fluide</p>
+            </div>
+
+            <!-- Bloc prix & économie en FCFA -->
+            <div class="details-price-card">
+              <div class="price-main-row">
+                <span class="price-current" id="details-price">28 500 FCFA</span>
+                <span class="price-strikethrough" id="details-old-price">36 000 FCFA</span>
+              </div>
+              <div class="price-savings-row">
+                <span class="price-savings" id="details-savings">Vous économisez 7 500 FCFA</span>
+                <span class="price-guarantee-note">Prix barré = prix vérifié 30 jours</span>
+              </div>
+            </div>
+
+            <!-- Description & bénéfices concrets -->
+            <p class="details-desc" id="details-desc">
+              Chinée avec soin au port de Cotonou, entièrement désinfectée et restaurée. Une coupe architecturale japonaise avec épaules déstructurées, idéale pour les soirées fraîches à Fidjrossè ou Haie Vive.
+            </p>
+
+            <ul class="details-bullets" id="details-bullets">
+              <li>Tombé fluide naturel sans rigidité artificielle</li>
+              <li>Doublure satinée respirante et coutures renforcées</li>
+              <li>Boutons corne d’origine polis à la main</li>
+            </ul>
+
+            <!-- Réassurance locale & livraison -->
+            <div class="details-delivery-box">
+              <div class="delivery-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M5 18H3c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v1"/>
+                  <path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/>
+                  <circle cx="7" cy="18" r="2"/>
+                  <circle cx="17" cy="18" r="2"/>
+                </svg>
+              </div>
+              <div class="delivery-text-wrap">
+                <span class="delivery-highlight" id="details-delivery">Commandez aujourd’hui : livrée sous 24 h à Cotonou et Calavi</span>
+                <span class="delivery-sub">Paiement Mobile Money (MTN MoMo / Moov / Wave) ou espèces à la livraison</span>
+              </div>
+            </div>
+
+            <!-- Actions : Bouton WhatsApp direct et secondaire -->
+            <div class="details-actions">
+              <a href="https://wa.me/?text=Bonjour%2C%20je%20souhaite%20commander%20la%20pi%C3%A8ce%20%3A%20Veste%20Tailoring%20Oversize%20Japonaise%20(Ref.%20VEL-01)"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="btn-order-whatsapp"
+                 id="btn-details-whatsapp"
+                 aria-label="Commander cette pièce sur WhatsApp">
+                <span>Commander cette pièce</span>
+                <svg class="icon-arrow-diag" width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+
+              <a href="https://wa.me/?text=Bonjour%2C%20pouvez-vous%20m'envoyer%20une%20vid%C3%A9o%20d%C3%A9tail%20de%20cette%20pi%C3%A8ce%20%3F"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="btn-video-whatsapp"
+                 id="btn-details-video"
+                 aria-label="Demander une vidéo de la pièce sur WhatsApp">
+                <span>Vidéo de détail</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Bandeau de miniatures / sélecteur direct -->
+        <div class="carousel-thumbs-strip" id="carousel-thumbs" role="tablist" aria-label="Miniatures des pièces">
+          <!-- Les miniatures sont injectées dynamiquement par script.js -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 4: PANNEAU DE CONFIANCE ==================== -->
+  <section class="trust-section" id="confiance" aria-label="Panneau de confiance">
     
     <div class="trust-panel" id="trust-panel">
       
